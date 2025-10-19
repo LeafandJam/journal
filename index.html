@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Quotes</title>
+    <title>Journal</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -18,16 +18,26 @@
             text-align: center;
             padding: 20px;
         }
-        .quote {
-            font-size: 32px;
-            line-height: 1.5;
-            margin: 20px;
-        }
+.quote {
+    font-size: 32px;
+    line-height: 1.5;
+    margin: 20px;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+}
+
+.quote:hover, .quote:active {
+    font-size: 36px; /* Increase size on tap as well with :active */
+}
+
+
     </style>
 </head>
 <body>
 
     <div class="quote" id="quote"></div>
+    <div id="notification" style="display: none; position: absolute; background-color: #333; color: white; padding: 10px; border-radius: 5px; margin-top: 10px; z-index: 1;"></div>
+
 
     <script>
         const quotes = [
@@ -94,6 +104,40 @@
 
         // Display the quote
         document.getElementById('quote').innerText = quoteOfTheDay.text;
+
+        // Display the quote
+document.getElementById('quote').innerText = quoteOfTheDay.text;
+
+// Display the quote
+document.getElementById('quote').innerText = quoteOfTheDay.text;
+
+// Add click event to copy text to clipboard
+document.getElementById('quote').addEventListener('click', () => {
+    navigator.clipboard.writeText(quoteOfTheDay.text).then(() => {
+        const notification = document.getElementById('notification');
+        notification.innerText = 'Copied';
+        notification.style.display = 'block';
+        
+        // Position the notification above the quote
+        const quoteElement = document.getElementById('quote');
+        const rect = quoteElement.getBoundingClientRect();
+// Position the notification for mobile view
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)'; // Center horizontally
+    notification.style.top = '20px'; // Or whatever space from the top
+
+
+        // Hide the notification after 2 seconds
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 2000); // Time in milliseconds
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+});
+
+
+
     </script>
 
 </body>
