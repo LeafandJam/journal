@@ -17,12 +17,16 @@
             margin: 0;
             text-align: center;
             padding: 20px;
+
+
         }
         .quote {
             font-size: 32px;
             line-height: 1.5;
             margin: 20px;
+            cursor: pointer; /* Change cursor to indicate it's clickable */
         }
+        
     </style>
 </head>
 <body>
@@ -82,19 +86,26 @@
 { text: "What sparked your curiosity today?" },
 { text: "How did you make time for self-reflection today?" },
 
-    
+    <div class="quote" id="quote"></div>
+
+    <script>
+        const quotes = [
+            { text: "How do you want to feel tomorrow?" },
+            { text: "What sparked your curiosity today?" },
+            { text: "How did you make time for self-reflection today?" },
         ];
 
-        // Get the current date
         const today = new Date();
         const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-        
-        // Select the quote based on the day of the year
         const quoteOfTheDay = quotes[dayOfYear % quotes.length];
 
-        // Display the quote
         document.getElementById('quote').innerText = quoteOfTheDay.text;
-    </script>
 
+        document.getElementById('quote').onclick = function() {
+            navigator.clipboard.writeText(quoteOfTheDay.text).then(() => {
+                alert("Quote copied to clipboard!");
+            });
+        };
+    </script>
 </body>
 </html>
